@@ -1,6 +1,6 @@
 package br.com.rodpk.gamelist.model.enums;
 
-public enum Genre {
+public enum GenreEnum {
 
     SANDBOX ("SANDBOX"),
     FPS ("FPS"),
@@ -20,8 +20,12 @@ public enum Genre {
 
     private final String id;
 
-    Genre(String id) {
+    GenreEnum(String id) {
         this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
     
 }

@@ -3,10 +3,12 @@ package br.com.rodpk.gamelist.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.rodpk.gamelist.model.Game;
 import br.com.rodpk.gamelist.repository.GameRepository;
 
+@Service
 public class GameService {
 
     @Autowired
@@ -21,6 +23,4 @@ public class GameService {
         return repository.save(game);
     }
 
-
-    
 }
