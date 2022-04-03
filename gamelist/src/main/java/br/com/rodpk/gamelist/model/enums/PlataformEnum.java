@@ -1,9 +1,6 @@
-package br.com.gamelist.gamelist.enums;
+package br.com.rodpk.gamelist.model.enums;
 
-import br.com.gamelist.gamelist.utils.EncodableEnum;
-import br.com.gamelist.gamelist.utils.JpaEnumConverter;
-
-public enum Plataform implements EncodableEnum<String>{
+public enum PlataformEnum {
 
     PC("PC"),
     NES ("NES"),
@@ -33,18 +30,8 @@ public enum Plataform implements EncodableEnum<String>{
 
     private final String id;
 
-    Plataform(String id) { this.id = id; }
-
-    @javax.persistence.Converter(autoApply = true)
-    public static class Converter extends JpaEnumConverter<String, Plataform> {
-        public Converter(){
-            super(Plataform.class);
-        }
+    PlataformEnum(String id) {
+        this.id = id;
     }
-
-    @Override
-    public String token() {
-        return id;
-    }
-
+    
 }
