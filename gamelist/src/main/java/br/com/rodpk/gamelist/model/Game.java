@@ -1,6 +1,7 @@
 package br.com.rodpk.gamelist.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,16 +37,14 @@ public class Game {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    //private List<GenreEnum> genres;
+    private List<Genre> genres;
 
-    //private List<PlataformEnum> platforms;
+    private List<Platform> platforms;
 
-    //private List<Category> categories;
+    private List<Category> categories;
 
     @Column(name = "RELEASE_DATE")
-
     private LocalDate releaseDate;
-
 
     @Column(name = "OVERRAL_RATING")
     private Integer overralRating;

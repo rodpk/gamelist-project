@@ -18,14 +18,14 @@ public enum GenreEnum {
     J_RPG ("J-RPG"),
     PUZZLE ("PUZZLE");
 
-    private final String id;
+    private final String value;
 
-    GenreEnum(String id) {
-        this.id = id;
+    GenreEnum(String value) {
+        this.value = value;
     }
 
-    public String getId() {
-        return id;
+    public String value() {
+        return value;
     }
     
 }

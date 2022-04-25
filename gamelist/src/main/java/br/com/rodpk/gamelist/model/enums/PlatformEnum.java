@@ -1,6 +1,6 @@
 package br.com.rodpk.gamelist.model.enums;
 
-public enum PlataformEnum {
+public enum PlatformEnum {
 
     PC("PC"),
     NES ("NES"),
@@ -28,14 +28,14 @@ public enum PlataformEnum {
     NINTENDO_DS_LITE ("NINTENDO DS LITE"),
     PLAYSTATION_VITA ("PLAYSTATION VITA");
 
-    private final String id;
+    private final String value;
 
-    PlataformEnum(String id) {
-        this.id = id;
+    PlatformEnum(String value) {
+        this.value = value;
     }
 
-    public String getId() {
-        return id;
+    public String value() {
+        return value;
     }
     
 }

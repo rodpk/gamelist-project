@@ -3,6 +3,7 @@ package br.com.rodpk.gamelist.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import br.com.rodpk.gamelist.model.enums.GenreEnum;
 import lombok.Data;
 
 
@@ -13,5 +14,5 @@ public class Genre {
     @Id
     private Integer id;
 
-    private String name;
+    private GenreEnum name;
 }
