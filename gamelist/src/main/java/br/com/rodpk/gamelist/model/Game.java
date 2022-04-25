@@ -2,12 +2,17 @@ package br.com.rodpk.gamelist.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -17,39 +22,43 @@ import lombok.Data;
 @Table(name = "game")
 public class Game {
     
-
-    @Id
-    @Column(name = "ID_GAME")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @Column(name = "game_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "DEVELOPER", nullable = false)
+    @Column(name = "developer", nullable = false)
     private String developer;
 
-
-    @Column(name = "DIRECTOR", nullable = false)
+    @Column(name = "director", nullable = false)
     private String director;
 
-
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description")
     private String description;
 
+    @ManyToMany
+    @JoinTable(name = "game_genres", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;
 
+    @ManyToMany
+    @JoinTable(name = "game_platforms", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "platform_id"))
     private List<Platform> platforms;
-
+    
+    @ManyToMany
+    @JoinTable(name = "game_categories", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
 
-    @Column(name = "RELEASE_DATE")
+    @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    @Column(name = "OVERRAL_RATING")
+    @Column(name = "overral_rating")
     private Integer overralRating;
 
-    @Column(name = "IMAGE")
+    @Column(name = "image")
     private String image;
+
+    @OneToMany(mappedBy = "game")
+    private Set<UserGames> users;
 
 }

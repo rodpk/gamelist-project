@@ -1,15 +1,28 @@
 package br.com.rodpk.gamelist.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import br.com.rodpk.gamelist.model.enums.CategoryEnum;
 import lombok.Data;
 
 @Entity
 @Data
 public class Category {
     @Id
+    @Column(name = "category_id")
     private Integer id;
 
-    private String name;
+    @Column(name = "name")
+    @Enumerated(EnumType.STRING)
+    private CategoryEnum name;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Game> games;
 }
