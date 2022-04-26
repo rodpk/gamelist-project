@@ -13,7 +13,7 @@ import br.com.rodpk.gamelist.model.Game;
 import br.com.rodpk.gamelist.service.GameService;
 
 @RestController
-@RequestMapping("/api/games")
+@RequestMapping("/games")
 public class GameController {
     
     @Autowired
