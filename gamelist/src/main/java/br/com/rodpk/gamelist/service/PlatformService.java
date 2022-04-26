@@ -1,5 +1,6 @@
 package br.com.rodpk.gamelist.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,8 +44,11 @@ public class PlatformService {
     
 
     public void saveAllPlatformsInDatabase() {    
+        List<Platform> platforms = new ArrayList<>();
         for (PlatformEnum platform : PlatformEnum.class.getEnumConstants()) {
-            repository.save(new Platform(platform));
+            platforms.add(new Platform(platform));
         }
+        // repository.save(new Platform(platform));
+        repository.saveAll(platforms);
     }
 }

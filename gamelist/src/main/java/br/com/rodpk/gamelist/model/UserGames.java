@@ -8,11 +8,13 @@ import javax.persistence.Table;
 
 import br.com.rodpk.gamelist.model.enums.Status;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "user_games")
-public class UserGames {
+@EqualsAndHashCode(callSuper=false)
+public class UserGames extends BaseEntity{
 
     @Id
     private Long id;

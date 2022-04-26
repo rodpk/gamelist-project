@@ -16,11 +16,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
 @Table(name = "game")
-public class Game {
+@EqualsAndHashCode(callSuper=false)
+public class Game extends BaseEntity{
     
     @Id @Column(name = "game_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

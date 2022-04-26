@@ -11,11 +11,13 @@ import javax.persistence.ManyToMany;
 
 import br.com.rodpk.gamelist.model.enums.GenreEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 @Data
 @Entity
-public class Genre {
+@EqualsAndHashCode(callSuper=false)
+public class Genre extends BaseEntity{
  
     @Id @Column(name = "genre_id")
     private Integer id;

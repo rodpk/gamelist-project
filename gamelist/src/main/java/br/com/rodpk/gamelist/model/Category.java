@@ -11,10 +11,12 @@ import javax.persistence.ManyToMany;
 
 import br.com.rodpk.gamelist.model.enums.CategoryEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-public class Category {
+@EqualsAndHashCode(callSuper=false)
+public class Category extends BaseEntity{
     @Id
     @Column(name = "category_id")
     private Integer id;

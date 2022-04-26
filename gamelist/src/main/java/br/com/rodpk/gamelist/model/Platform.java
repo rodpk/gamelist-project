@@ -15,10 +15,12 @@ import org.springframework.beans.BeanUtils;
 import br.com.rodpk.gamelist.model.dto.PlatformRequest;
 import br.com.rodpk.gamelist.model.enums.PlatformEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-public class Platform {
+@EqualsAndHashCode(callSuper=false)
+public class Platform extends BaseEntity{
     
 
     @Id @Column(name = "platform_id")

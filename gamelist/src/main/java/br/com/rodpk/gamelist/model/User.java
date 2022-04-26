@@ -9,18 +9,28 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+@EqualsAndHashCode(callSuper=false)
+public class User extends BaseEntity{
     
     @Id @Column(name = "user_id")
     private Integer id;
 
+    @Column(nullable = false, length = 256)
     private String name;
     
+    @Column(nullable = false, length = 256)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+    
+    @Column(nullable = false)
+    private String perms;
 
     
     @OneToMany(mappedBy = "user")
