@@ -27,4 +27,8 @@ public class Category extends BaseEntity{
 
     @ManyToMany(mappedBy = "categories")
     private Set<Game> games;
+
+    public Category(CategoryEnum category) {
+        this.name = category;
+    }
 }

@@ -28,4 +28,8 @@ public class Genre extends BaseEntity{
 
     @ManyToMany(mappedBy = "genres")
     private Set<Game> games;
+
+    public Genre(GenreEnum genre) {
+        this.name = genre;
+    }
 }

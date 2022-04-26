@@ -47,6 +47,5 @@ public class Platform extends BaseEntity{
         this.name = name;
     }
 
-    public Platform() {
-    }
+    public Platform() {}
 }
