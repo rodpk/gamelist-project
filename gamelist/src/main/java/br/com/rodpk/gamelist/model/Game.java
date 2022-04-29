@@ -60,6 +60,11 @@ public class Game extends BaseEntity{
     @Column(name = "image")
     private String image;
 
+    @Column(name = "is_indie")
+    private boolean isIndie;
+
+    private String country; // enum with all countries?
+
     @OneToMany(mappedBy = "game")
     private Set<UserGames> users;
 

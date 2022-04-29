@@ -21,12 +21,9 @@ public class BaseEntity implements Serializable{
     LocalDateTime updatedAt;
 
     @Column(name = "fl_active", nullable = false)
-    int active = 1;
+    boolean active = true;
 
 
-    public boolean isActive() {
-        return this.active == 1 ? true : false;
-    }
 
     @PrePersist
     public void PrePersist() {

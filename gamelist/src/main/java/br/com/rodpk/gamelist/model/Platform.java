@@ -23,8 +23,7 @@ import lombok.EqualsAndHashCode;
 public class Platform extends BaseEntity{
     
 
-    @Id @Column(name = "platform_id")
-    @GeneratedValue(strategy = javax.persistence.GenerationType.SEQUENCE)
+    @Id @Column(name = "platform_id") @GeneratedValue(strategy = javax.persistence.GenerationType.SEQUENCE)
     private Integer id;
 
 
