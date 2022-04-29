@@ -2,6 +2,7 @@ package br.com.rodpk.gamelist.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +14,7 @@ import br.com.rodpk.gamelist.repository.GenreRepository;
 public class GenreService {
 
     @Autowired
-    GenreRepository repository;
+    private GenreRepository repository;
 
     public GenreResponse findById(Integer id) {
        var genre = repository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
@@ -27,6 +28,10 @@ public class GenreService {
             genres.add(new Genre(genre));   
         }
         repository.saveAll(genres);
+    }
+
+    public List<GenreResponse> findAll() {
+        return repository.findAll().stream().map(GenreResponse::of).collect(Collectors.toList());
     }
     
 }

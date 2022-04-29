@@ -17,7 +17,7 @@ import br.com.rodpk.gamelist.repository.PlatformRepository;
 public class PlatformService {
 
     @Autowired
-    PlatformRepository repository;
+    private PlatformRepository repository;
 
     public PlatformResponse findById(Integer id) {
         Platform platform = repository.findById(id).orElseThrow(() -> new RuntimeException("not found"));

@@ -16,7 +16,7 @@ public class CategoryService {
     
 
     @Autowired
-    CategoryRepository repository;
+    private CategoryRepository repository;
 
     public CategoryResponse findById(Integer id) {
        var genre = repository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
