@@ -27,8 +27,8 @@ public class FileController {
     private FileService service;
 
     @PostMapping
-    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
-        String response = service.save(file);
+    public ResponseEntity<File> upload(@RequestParam("file") MultipartFile file) {
+        File response = service.save(file);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

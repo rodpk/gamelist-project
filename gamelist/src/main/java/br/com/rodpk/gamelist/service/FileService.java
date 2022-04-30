@@ -24,7 +24,7 @@ public class FileService {
 
     private Logger log = Logger.getLogger("FileService");
 
-    public String save(MultipartFile multipartFile) {
+    public File save(MultipartFile multipartFile) {
 
         try {
             File file = new File();
@@ -33,9 +33,9 @@ public class FileService {
             file.setData(multipartFile.getBytes());
             file.setSize(file.getSize());
     
-            repository.save(file);
             log.info(MessagesConstants.FILE_UPLOADED + multipartFile.getOriginalFilename());
-            return MessagesConstants.FILE_UPLOADED + multipartFile.getOriginalFilename();
+            return repository.save(file);
+            //return MessagesConstants.FILE_UPLOADED + multipartFile.getOriginalFilename();
         } catch(Exception ex) {
             log.severe(MessagesConstants.FILE_ERROR_UPLOADING + multipartFile.getOriginalFilename());
             log.severe(ex.getMessage());

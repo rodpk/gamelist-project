@@ -39,14 +39,11 @@ public class Game extends BaseEntity{
 
     @Column(name = "director", nullable = false)
     private String director;
+    // add table development team
+    // name - position
 
     @Column(name = "description")
     private String description;
-
-    @ManyToMany
-    @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "game_genres", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    private List<Genre> genres;
 
     @ManyToMany
     @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
@@ -74,8 +71,12 @@ public class Game extends BaseEntity{
 
     private String country; 
     // enum with all countries?
-    // each country is a enum with 
+    // each country is a enum with
+     
     @OneToMany(mappedBy = "game")
     private Set<UserGames> users;
+
+    @OneToMany(mappedBy = "game")
+    private Set<DevelopmentTeam> team;
 
 }

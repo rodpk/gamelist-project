@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
+import br.com.rodpk.gamelist.model.File;
 import br.com.rodpk.gamelist.model.Game;
 import br.com.rodpk.gamelist.repository.GameRepository;
 
@@ -17,6 +19,9 @@ public class GameService {
 
     @Autowired
     private GameRepository repository;
+
+    @Autowired
+    private FileService fileService;
 
     private Logger log = Logger.getLogger("GameService");
 
@@ -39,6 +44,20 @@ public class GameService {
             e.printStackTrace();
         }
 
+    }
+
+    public Game update(Long id, Game game) {
+        return null;
+    }
+
+    public Game updateImage(MultipartFile file, Long id) {
+
+        File savedFile = fileService.save(file);
+        Game game = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("game not found"));
+        game.setImage(savedFile);
+        Game updatedGame = repository.save(game);
+
+        return updatedGame;
     }
 
 }
