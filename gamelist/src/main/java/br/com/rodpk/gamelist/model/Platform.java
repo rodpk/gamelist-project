@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.BeanUtils;
 
 import br.com.rodpk.gamelist.model.dto.PlatformRequest;
@@ -32,6 +34,7 @@ public class Platform extends BaseEntity{
     private PlatformEnum name;
 
     @ManyToMany(mappedBy = "platforms")
+    @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Game> games;
 
 

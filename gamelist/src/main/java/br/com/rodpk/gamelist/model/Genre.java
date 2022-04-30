@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import br.com.rodpk.gamelist.model.enums.GenreEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,6 +32,7 @@ public class Genre extends BaseEntity{
     private GenreEnum name;
 
     @ManyToMany(mappedBy = "genres")
+    @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Game> games;
 
     public Genre(GenreEnum genre) {

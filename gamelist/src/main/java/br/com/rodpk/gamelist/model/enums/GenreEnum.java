@@ -16,6 +16,7 @@ public enum GenreEnum {
     SURVIVAL ("SURVIVAL"),
     HORROR ("HORROR"),
     J_RPG ("J-RPG"),
+    RPG("RPG"),
     PUZZLE ("PUZZLE");
 
     private final String value;
