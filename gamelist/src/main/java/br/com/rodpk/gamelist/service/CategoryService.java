@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
 import br.com.rodpk.gamelist.model.Category;
 import br.com.rodpk.gamelist.model.dto.CategoryResponse;
 import br.com.rodpk.gamelist.model.enums.CategoryEnum;
@@ -19,7 +20,7 @@ public class CategoryService {
     private CategoryRepository repository;
 
     public CategoryResponse findById(Integer id) {
-       var genre = repository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+       var genre = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("not found"));
        return CategoryResponse.of(genre);
     }
 

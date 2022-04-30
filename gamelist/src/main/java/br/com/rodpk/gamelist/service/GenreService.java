@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
 import br.com.rodpk.gamelist.model.Genre;
 import br.com.rodpk.gamelist.model.dto.GenreResponse;
 import br.com.rodpk.gamelist.model.enums.GenreEnum;
@@ -17,7 +18,7 @@ public class GenreService {
     private GenreRepository repository;
 
     public GenreResponse findById(Integer id) {
-       var genre = repository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+       var genre = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("not found"));
        return GenreResponse.of(genre);
     }
 

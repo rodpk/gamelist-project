@@ -28,4 +28,10 @@ public class ExceptionsHandler {
         log.severe(MessagesConstants.FILE_EXCEEDS_MAXIMUM_SIZE);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(details);
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex) {
+        var details = new ExceptionDetails(HttpStatus.NO_CONTENT, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(details);
+    }
 }

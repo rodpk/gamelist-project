@@ -3,6 +3,7 @@ package br.com.rodpk.gamelist.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
 import br.com.rodpk.gamelist.model.Game;
 import br.com.rodpk.gamelist.repository.GameRepository;
 
@@ -14,11 +15,16 @@ public class GameService {
 
 
     public Game findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Game not found"));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Game not found"));
     }
 
     public Game save(Game game) {
+        validateData(game);
         return repository.save(game);
+    }
+
+    private void validateData(Game game) {
+
     }
 
 }

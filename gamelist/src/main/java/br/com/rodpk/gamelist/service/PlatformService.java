@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
 import br.com.rodpk.gamelist.model.Platform;
 import br.com.rodpk.gamelist.model.dto.PlatformRequest;
 import br.com.rodpk.gamelist.model.dto.PlatformResponse;
@@ -20,7 +21,7 @@ public class PlatformService {
     private PlatformRepository repository;
 
     public PlatformResponse findById(Integer id) {
-        Platform platform = repository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+        Platform platform = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("not found"));
         var response = PlatformResponse.of(platform);
         return response;
     }
