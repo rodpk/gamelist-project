@@ -1,7 +1,5 @@
 package br.com.rodpk.gamelist.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +26,7 @@ public class DevelopmentTeam extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "game_id")
-    private Set<Game> games;
+    private Game game;
 
     @Column(name = "name")
     private String name;

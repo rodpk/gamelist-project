@@ -63,7 +63,7 @@ public class Game extends BaseEntity{
 
     @OneToOne
     //(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_Id", referencedColumnName = "file_id")
+    @JoinColumn(name = "image_id", referencedColumnName = "file_id")
     private File image;
 
     @Column(name = "is_indie")
@@ -77,6 +77,7 @@ public class Game extends BaseEntity{
     private Set<UserGames> users;
 
     @OneToMany(mappedBy = "game")
+    @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<DevelopmentTeam> team;
 
 }
