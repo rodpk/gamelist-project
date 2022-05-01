@@ -20,7 +20,7 @@ public class BaseEntity implements Serializable{
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
     LocalDateTime updatedAt;
 
-    @Column(name = "fl_active", nullable = false)
+    @Column(name = "active", nullable = false)
     boolean active = true;
 
 

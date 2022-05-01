@@ -30,7 +30,9 @@ public class UserGames extends BaseEntity{
     @JoinColumn(name = "game_id")
     private Game game;
 
-    private float rating;
+    private Float score;
+
+    private String review;
 
     private Status status;
 

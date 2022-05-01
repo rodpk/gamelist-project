@@ -35,12 +35,7 @@ public class Game extends BaseEntity{
     private String name;
 
     @Column(name = "developer", nullable = false)
-    private String developer;
-
-    @Column(name = "director", nullable = false)
-    private String director;
-    // add table development team
-    // name - position
+    private String developer; // desenvolvedora
 
     @Column(name = "description")
     private String description;

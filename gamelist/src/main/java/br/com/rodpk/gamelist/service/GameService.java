@@ -51,13 +51,16 @@ public class GameService {
     }
 
     public Game updateImage(MultipartFile file, Long id) {
-
         File savedFile = fileService.save(file);
         Game game = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("game not found"));
         game.setImage(savedFile);
         Game updatedGame = repository.save(game);
 
         return updatedGame;
+    }
+
+    public void howManyPeopleArePlaying() {
+
     }
 
 }
