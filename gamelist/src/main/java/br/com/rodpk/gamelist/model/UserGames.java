@@ -36,4 +36,6 @@ public class UserGames extends BaseEntity{
 
     private Status status;
 
+    private boolean favorited;
+
 }

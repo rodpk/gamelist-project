@@ -30,6 +30,8 @@ public class GameLogService {
         Integer totalReviews = reviewData.get("good") + reviewData.get("neutral") + reviewData.get("bad");
         log.setTotalReviews(totalReviews);
 
+        log.setPlayersFavorited(getFavorited(list));
+
         // logRepository.save(log);
 
     }
@@ -47,22 +49,22 @@ public class GameLogService {
         for(UserGames userGame : list) {
             switch(userGame.getStatus()) {
                 case COMPLETED:
-                    completedQuantity += 1;
+                    completedQuantity++;
                     info.put("completed", completedQuantity);
                 break;
 
                 case DROPPED:
-                    droppedQuantity += 1;
+                    droppedQuantity++;
                     info.put("dropped", droppedQuantity);
                 break;
 
                 case GAMING:
-                    gamingQuantity +=1;
+                    gamingQuantity++;
                     info.put("gaming", gamingQuantity);
                 break;
 
                 case WANT_TO_PLAY:
-                    wantToPlayQuantity +=1;
+                    wantToPlayQuantity++;
                     info.put("wantToPlay", wantToPlayQuantity);
                 break;
                 
@@ -84,13 +86,13 @@ public class GameLogService {
 
             if (userGame.getScore() != null) {
                 if (userGame.getScore() >= 7 && userGame.getScore() <= 10) {
-                    goodReviews +=1;
+                    goodReviews ++;
                     info.put("good", goodReviews);
                 } else if(userGame.getScore() >= 5 && userGame.getScore() <= 6) {
-                    neutralReviews += 1;
+                    neutralReviews ++;
                     info.put("neutral", neutralReviews);
                 } else if (userGame.getScore() >= 0 && userGame.getScore() <= 4) {
-                    badReviews += 1;
+                    badReviews ++;
                     info.put("bad", badReviews);
                 }
             }
@@ -98,7 +100,15 @@ public class GameLogService {
         return info;
     }
 
-    
+    private Integer getFavorited(List<UserGames> userGames) {
+        Integer qtdFavorited=0;
+
+        for(UserGames userGame : userGames) {
+            if(userGame.isFavorited()) qtdFavorited++;
+        }
+
+        return qtdFavorited;
+    } 
 
     
 }

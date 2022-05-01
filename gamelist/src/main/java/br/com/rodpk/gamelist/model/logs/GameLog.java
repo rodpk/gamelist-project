@@ -40,6 +40,9 @@ public class GameLog {
     @Column(name = "total_reviews")
     private Integer totalReviews;
 
+    @Column(name = "favorited")
+    private Integer playersFavorited;
+
     @Column(name = "created_at", columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime createdAt;
 
