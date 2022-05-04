@@ -14,7 +14,6 @@ import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
 import br.com.rodpk.gamelist.model.File;
 import br.com.rodpk.gamelist.model.dto.FileResponse;
 import br.com.rodpk.gamelist.repository.FileRepository;
-import br.com.rodpk.gamelist.utils.MessagesConstants;
 
 @Service
 public class FileService {
@@ -25,25 +24,24 @@ public class FileService {
     private Logger log = Logger.getLogger("FileService");
 
     public File save(MultipartFile multipartFile) {
-
+        String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        
         try {
             File file = new File();
-            file.setName(StringUtils.cleanPath(multipartFile.getOriginalFilename()));
+            file.setName(filename);
             file.setContentType(multipartFile.getContentType());
             file.setData(multipartFile.getBytes());
             file.setSize(file.getSize());
     
-            log.info(MessagesConstants.FILE_UPLOADED + multipartFile.getOriginalFilename());
+            log.info(String.format("file %s saved successfully", filename));
             return repository.save(file);
-            //return MessagesConstants.FILE_UPLOADED + multipartFile.getOriginalFilename();
         } catch(Exception ex) {
-            log.severe(MessagesConstants.FILE_ERROR_UPLOADING + multipartFile.getOriginalFilename());
-            log.severe(ex.getMessage());
-            throw new RuntimeException(MessagesConstants.FILE_ERROR_UPLOADING + multipartFile.getOriginalFilename());
+            log.severe(String.format("Error trying to save %s file on database: %s", filename, ex.getMessage()));
+            throw new RuntimeException(String.format("Error trying to save %s file on database: %s", filename, ex.getMessage()));
         }
     }
 
-    public File getFile(String id) {
+    public File findFile(String id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("not found"));
     }
 

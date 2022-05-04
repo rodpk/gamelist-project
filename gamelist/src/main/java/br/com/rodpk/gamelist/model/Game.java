@@ -16,9 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import br.com.rodpk.gamelist.model.dto.GameRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -72,7 +75,27 @@ public class Game extends BaseEntity{
     private Set<UserGames> users;
 
     @OneToMany(mappedBy = "game")
+    @JsonManagedReference
     @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<DevelopmentTeam> team;
+
+
+    public Game(Long id) {
+        this.id = id;
+    }
+
+    public Game() {}
+
+    public static Game of(GameRequest request) {
+        var game = new Game();
+        game.setName(request.getName());
+        game.setDeveloper(request.getDeveloper());
+        game.setDescription(request.getDescription());
+        game.setReleaseDate(request.getReleaseDate());
+        game.setIndie(request.getIndie());
+        game.setCountry(request.getCountry());
+        return game;
+
+    }
 
 }

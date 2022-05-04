@@ -39,7 +39,7 @@ public class FileController {
 
     @GetMapping("{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-        File file = service.getFile(id);
+        File file = service.findFile(id);
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
             .contentType(MediaType.valueOf(file.getContentType()))

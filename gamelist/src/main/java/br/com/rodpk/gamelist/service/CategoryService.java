@@ -2,6 +2,8 @@ package br.com.rodpk.gamelist.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,12 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
+    private Logger log = Logger.getLogger("CategoryService");
+
+
     public CategoryResponse findById(Integer id) {
        var genre = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("not found"));
+       log.info(String.format("genre %s found", genre.getName()));
        return CategoryResponse.of(genre);
     }
 
@@ -30,11 +36,13 @@ public class CategoryService {
         for (CategoryEnum category : CategoryEnum.class.getEnumConstants()) {
             categories.add(new Category(category));   
         }
+        log.info("categories saved in database");
         repository.saveAll(categories);
     }
 
     public List<CategoryResponse> findAll() {
-        return null;
+        return repository.findAll().stream().map(CategoryResponse::of).collect(Collectors.toList());
+
     }
 
 }

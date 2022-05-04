@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.rodpk.gamelist.config.exception.EntityNotFoundException;
 import br.com.rodpk.gamelist.model.File;
 import br.com.rodpk.gamelist.model.Game;
+import br.com.rodpk.gamelist.model.dto.GameRequest;
 import br.com.rodpk.gamelist.repository.GameRepository;
 
 @Service
@@ -30,20 +31,9 @@ public class GameService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Game not found"));
     }
 
-    public Game save(Game game) {
-        validateData(game);
-        return repository.save(game);
-    }
-
-    private void validateData(Game game) {
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            log.info(mapper.writeValueAsString(game));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
+    public Game save(GameRequest game) {
+        var entity = Game.of(game);
+        return repository.save(entity);
     }
 
     public Game update(Long id, Game game) {
