@@ -2,9 +2,6 @@ package br.com.rodpk.gamelist.service;
 
 import java.util.logging.Logger;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,11 +30,26 @@ public class GameService {
 
     public Game save(GameRequest game) {
         var entity = Game.of(game);
-        return repository.save(entity);
+        Game saved = repository.save(entity);
+
+        log.info(String.format("Game %s saved successfully", game.getName()));
+        return saved;
     }
 
-    public Game update(Long id, Game game) {
-        return null;
+    public Game update(Long id, GameRequest request) {
+        var found = repository.findById(id);
+
+        if (found.isEmpty()) {
+            throw new EntityNotFoundException("game "+ id +" not found");
+        }
+        
+        var entity = Game.of(request);
+        entity.setId(id);
+
+        var saved = repository.save(entity);
+
+        log.info(String.format("Game %s updated successfully.", saved.getId()));
+        return saved;
     }
 
     public Game updateImage(MultipartFile file, Long id) {
@@ -45,7 +57,7 @@ public class GameService {
         Game game = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("game not found"));
         game.setImage(savedFile);
         Game updatedGame = repository.save(game);
-
+        log.info(String.format("Game image %s saved succesfully in database.", updatedGame.getImage().getName()));
         return updatedGame;
     }
 
