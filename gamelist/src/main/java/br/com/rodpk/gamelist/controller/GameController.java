@@ -35,6 +35,12 @@ public class GameController {
         return ResponseEntity.ok(gameService.findById(id));
     }
 
+    @GetMapping("/do-something")
+    public String doSomething() {
+        gameService.doSomething();
+        return "ok";
+    }
+
     @PostMapping
     public ResponseEntity<Game> create(@RequestBody GameRequest game) {
         return ResponseEntity.ok(gameService.save(game));

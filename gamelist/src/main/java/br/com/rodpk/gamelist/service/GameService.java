@@ -1,5 +1,6 @@
 package br.com.rodpk.gamelist.service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,21 @@ public class GameService {
     public Game findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Game not found"));
     }
+
+
+    public void doSomething() {
+        try {
+            List<Game> selectAllActiveNative = repository.selectAllActiveNative();
+    
+            log.info("native: " + selectAllActiveNative.size());
+            List<Game> selectAllJPA = repository.selectAllJPA();
+
+            log.info("jpa: " + selectAllJPA.size());
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }    
+    }
+
 
     public Game save(GameRequest game) {
         var entity = Game.of(game);

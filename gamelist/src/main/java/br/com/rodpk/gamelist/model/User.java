@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.rodpk.gamelist.model.dto.UserRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -45,4 +46,14 @@ public class User extends BaseEntity{
     
     @OneToMany(mappedBy = "user")
     private Set<UserGames> games;
+
+    public static User of(UserRequest request) {
+        var user = new User();
+        user.setEmail(request.getEmail());
+        user.setName(request.getName());
+        user.setNickname(request.getNickname());
+        user.setPassword(request.getPassword());
+        user.setPerms("gamelist.mainpage.read;gamelist.mainpage.write;gamelist.userpage.read;gamelist.userpage.write;");
+        return user;
+    }
 }
